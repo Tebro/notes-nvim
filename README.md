@@ -41,8 +41,8 @@ Default configuration:
 ```lua
 {
   notes_dir = vim.fn.expand("~/notes"),
-  journal_dir = vim.fn.expand("~/notes/journal"),
-  quick_notes_dir = vim.fn.expand("~/notes/quick"),
+  journal_dir = nil,  -- Defaults to notes_dir/journal
+  quick_notes_dir = nil,  -- Defaults to notes_dir/quick
   default_extension = ".md",
   auto_save = true,
   templates = {
@@ -51,6 +51,8 @@ Default configuration:
   },
 }
 ```
+
+**Note**: `journal_dir` and `quick_notes_dir` automatically default to subdirectories of `notes_dir` unless explicitly configured. For example, if you set `notes_dir = "~/my-notes"`, then `journal_dir` becomes `~/my-notes/journal` and `quick_notes_dir` becomes `~/my-notes/quick`.
 
 ## Commands
 

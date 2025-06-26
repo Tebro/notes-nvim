@@ -3,8 +3,8 @@ local utils = require('notes-nvim.utils')
 
 M.config = {
   notes_dir = vim.fn.expand("~/notes"),
-  journal_dir = vim.fn.expand("~/notes/journal"),
-  quick_notes_dir = vim.fn.expand("~/notes/quick"),
+  journal_dir = nil,  -- Will default to notes_dir/journal
+  quick_notes_dir = nil,  -- Will default to notes_dir/quick
   default_extension = ".md",
   auto_save = true,
   templates = {
@@ -15,6 +15,15 @@ M.config = {
 
 function M.setup(opts)
   M.config = vim.tbl_deep_extend("force", M.config, opts or {})
+  
+  -- Set default subdirectories if not explicitly configured
+  if not M.config.journal_dir then
+    M.config.journal_dir = M.config.notes_dir .. "/journal"
+  end
+  
+  if not M.config.quick_notes_dir then
+    M.config.quick_notes_dir = M.config.notes_dir .. "/quick"
+  end
   
   -- Ensure directories exist
   utils.ensure_dir(M.config.notes_dir)
